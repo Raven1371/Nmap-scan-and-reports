@@ -52,13 +52,24 @@ Requires Python 3.9+.
 For a normal isolated Python tool installation:
 
 ```bash
+sudo apt-get update
+sudo apt-get install -y python3.14-venv
 pipx install .
 nmap-flow-analyzer --help
 ```
 
+For a closed-network Ubuntu 26.04 installation, pre-stage
+`python3.14-venv` and its operating-system dependencies from approved Ubuntu
+installation media or an internal mirror before disconnecting external
+networking. Verify `python3 -m venv --help` succeeds before transfer. The
+portable, onefile, AppImage, and DEB artifacts do not require this package;
+source/wheel installations do.
+
 For development:
 
 ```bash
+sudo apt-get update
+sudo apt-get install -y python3.14-venv
 git clone https://github.com/Raven1371/shadow-claw.git
 cd shadow-claw
 python3 -m venv .venv
