@@ -1,6 +1,6 @@
 # Linux deployment hardening and scale validation
 
-Shadow Claw 1.6 remains an offline-capable workstation/server analyzer. Build the wheel, source distribution, portable archive, one-file executable, DEB, RPM, and AppImage in disposable Ubuntu 24.04 and Rocky Linux 9 environments. Clean-host smoke tests must install only locally built artifacts and an offline wheelhouse, then exercise Nmap, Zeek, PCAP, PCAPNG, Suricata EVE, Shadow Evidence export/validation, output lifecycle, installation, and removal.
+Shadow Claw 1.6 remains an offline-capable workstation/server analyzer. Build the wheel, source distribution, portable archive, one-file executable, DEB, and AppImage in a disposable Ubuntu 26.04 LTS x86-64 environment. Ubuntu 24.04 is not part of the current validated release baseline. Rocky/RHEL packaging completion is a separate milestone. Clean-host smoke tests must install only locally built artifacts and an offline wheelhouse, then exercise Nmap, Zeek, PCAP, PCAPNG, Suricata EVE, Shadow Evidence export/validation, output lifecycle, installation, and removal.
 
 `scripts/benchmark-ingestion.py` deterministically generates mixed EVE, classic PCAP, and PCAPNG inputs using reserved addresses. The record bound is 1 to 1,000,000. It records OS, Python and parser versions, seed, bytes, records, wall time, CPU time, throughput, and peak traced memory. PR CI uses a small tier; manual Linux runs establish larger observations. Results are baselines, not arbitrary pass thresholds. Generated files are temporary and must not be committed.
 
