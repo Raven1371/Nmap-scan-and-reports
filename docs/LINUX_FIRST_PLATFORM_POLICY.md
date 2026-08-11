@@ -2,13 +2,17 @@
 
 ## Platform status
 
-Supported active development:
+Primary validated Ubuntu baseline:
 
-- Ubuntu 24.04 x64
-- Rocky Linux 9 / RHEL-compatible x64
+- Ubuntu 26.04 LTS x86-64
 
-Deferred:
+Not part of the current validated Ubuntu release baseline:
 
+- Ubuntu 24.04
+
+Separate platform milestones:
+
+- Rocky Linux / RHEL-compatible x86-64 completion
 - Windows 11 x64
 
 Windows validation, packaging, and application integration are deferred
@@ -17,9 +21,9 @@ to a later dedicated development phase.
 The Linux-first development strategy must not be represented as validated
 Windows support or as a fully cross-platform production release.
 
-Deferred Windows work does not block Linux development. Existing Windows
+Rocky and Windows work does not block Ubuntu completion. Existing platform
 compatibility code, documentation, tests, and workflows should be preserved
-where practical and must not be deleted solely because validation is deferred.
+where practical and must not be deleted solely because completion is separate.
 
 Shared components remain platform-neutral: schemas, evidence formats,
 identifiers, timestamps, normalized event structures, compatibility metadata,

@@ -6,10 +6,11 @@ Shadow Ecosystem. This repository is `Raven1371/shadow-claw`. The existing
 supported compatibility interface while a future `shadow-claw` command is
 planned.
 
-Active development is Linux-first on Ubuntu 24.04 x64 and Rocky Linux 9 /
-RHEL-compatible x64. Windows validation, packaging, and application
-integration are deferred to a later dedicated phase; this is not a claim of
-validated Windows support or a fully cross-platform production release. The
+Active development is Linux-first with Ubuntu 26.04 LTS x86-64 as the primary
+validated Ubuntu baseline. Ubuntu 24.04 is not part of the current validated
+release baseline. Rocky Linux/RHEL-compatible and Windows completion are
+separate milestones; Ubuntu readiness is not a claim of their completion or a
+fully cross-platform production release. The
 existing Linux [`v1.3.0-rc1`](https://github.com/Raven1371/shadow-claw/releases/tag/v1.3.0-rc1)
 prerelease remains available and unchanged.
 
