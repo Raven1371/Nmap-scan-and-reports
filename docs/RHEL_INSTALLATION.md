@@ -1,5 +1,12 @@
 # Rocky Linux and RHEL-compatible installation
 
+Install the operating-system fontconfig configuration used by the bundled
+Graphviz renderer:
+
+```bash
+sudo dnf install fontconfig
+```
+
 For the portable archive, verify the SHA-256 inventory, extract it, then run:
 
 ```bash
