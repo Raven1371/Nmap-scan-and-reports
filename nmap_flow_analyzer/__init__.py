@@ -7,7 +7,7 @@ classification so that observed reachability is never conflated with
 confirmed production traffic.
 """
 
-__version__ = "1.6.0rc1"
+__version__ = "1.6.0-rc1"
 TOOL_NAME = "nmap-flow-analyzer"
 
 DISCLAIMER = (

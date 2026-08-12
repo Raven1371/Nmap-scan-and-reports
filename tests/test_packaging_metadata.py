@@ -25,7 +25,7 @@ def _metadata():
 
 def test_pyproject_is_authoritative_for_version_and_entry_point():
     project = _metadata()["project"]
-    assert project["version"] == __version__ == "1.6.0rc1"
+    assert project["version"] == __version__ == "1.6.0-rc1"
     assert project["scripts"]["nmap-flow-analyzer"] == (
         "nmap_flow_analyzer.cli:main"
     )
