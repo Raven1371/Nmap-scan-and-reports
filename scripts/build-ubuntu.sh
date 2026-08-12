@@ -2,7 +2,7 @@
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
 bash "$root/scripts/package-linux-portable.sh" ubuntu
-release_version=${RELEASE_VERSION:-1.3.0-rc1}
+release_version=${RELEASE_VERSION:-1.6.0-rc1}
 work="$root/build/linux-ubuntu"
 out="$root/dist-linux-ubuntu"
 package="$work/deb"
@@ -10,7 +10,8 @@ mkdir -p "$package/DEBIAN" "$package/opt/nmap-flow-analyzer" "$package/usr/bin"
 cp "$root/packaging/ubuntu/control" "$package/DEBIAN/control"
 cp -a "$work/bundle/nmap-flow-analyzer-$release_version-ubuntu-x64/." \
   "$package/opt/nmap-flow-analyzer/"
-ln -s /opt/nmap-flow-analyzer/nmap-flow-analyzer "$package/usr/bin/nmap-flow-analyzer"
+cp "$root/packaging/common/installed-launcher.sh" "$package/usr/bin/nmap-flow-analyzer"
+chmod 0755 "$package/usr/bin/nmap-flow-analyzer"
 mkdir -p "$package/usr/share/doc/nmap-flow-analyzer"
 cp "$root/LICENSE" "$root/NOTICE" "$root/COPYRIGHT.md" "$root/COMMERCIAL_USE.md" \
   "$root/TRADEMARKS.md" "$root/THIRD_PARTY_NOTICES.md" \

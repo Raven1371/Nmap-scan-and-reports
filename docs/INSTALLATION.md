@@ -12,5 +12,5 @@ Choose one supported path:
 After installation, run `nmap-flow-analyzer doctor`. No automatic update or
 telemetry request is made.
 
-The Linux v1.3.0-rc1 artifacts are release-candidate builds. Windows 11
+The Linux v1.6.0-rc1 artifacts are release-candidate builds. Windows 11
 self-hosted validation remains pending.

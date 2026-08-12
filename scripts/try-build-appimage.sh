@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 platform=${1:?usage: try-build-appimage.sh ubuntu|rhel}
-release_version=${RELEASE_VERSION:-1.3.0-rc1}
+release_version=${RELEASE_VERSION:-1.6.0-rc1}
 root=$(cd "$(dirname "$0")/.." && pwd)
 work="$root/build/linux-$platform"
 out="$root/dist-linux-$platform"
