@@ -76,7 +76,7 @@ jobs:
           test "$test_rc" -eq 0
           python3 run_tests.py
           python3 scripts/benchmark-ingestion.py --work-dir build --records 10000 --output build/rocky-ingestion-benchmark.json
-          python3 scripts/generate-sbom.py --lock requirements.lock --component nmap-flow-analyzer --version 1.6.0.dev0 --output build/nmap-flow-analyzer.cdx.json
+          python3 scripts/generate-sbom.py --lock requirements.lock --component nmap-flow-analyzer --version 1.6.0-rc1 --output build/nmap-flow-analyzer.cdx.json
       - name: Build portable, onefile, and RPM
         run: bash scripts/build-rhel.sh
       - name: Validate license payload and native attribution
@@ -90,16 +90,16 @@ jobs:
           tar -xzf dist-linux-rhel/nmap-flow-analyzer-1.3.0-rc1-rhel-x64-portable.tar.gz -C build/smoke-portable
           python3 scripts/smoke-test-package.py \
             --command build/smoke-portable/nmap-flow-analyzer-1.3.0-rc1-rhel-x64/nmap-flow-analyzer \
-            --examples examples --config network_config.example.yaml --expected-version 1.6.0.dev0 --require-graphviz
+            --examples examples --config network_config.example.yaml --expected-version 1.6.0-rc1 --require-graphviz
           python3 scripts/smoke-test-package.py \
             --command dist-linux-rhel/nmap-flow-analyzer-1.3.0-rc1-rhel-x64 \
-            --examples examples --config network_config.example.yaml --expected-version 1.6.0.dev0 --require-graphviz
+            --examples examples --config network_config.example.yaml --expected-version 1.6.0-rc1 --require-graphviz
       - name: Install, test, and remove RPM
         run: |
           rpm -ivh dist-linux-rhel/nmap-flow-analyzer-1.3.0-rc1-rhel-x64.rpm
           rpm -ql nmap-flow-analyzer | tee build/rpm-file-list.txt
           python3 scripts/smoke-test-package.py --command /usr/bin/nmap-flow-analyzer \
-            --examples examples --config network_config.example.yaml --expected-version 1.6.0.dev0 --require-graphviz
+            --examples examples --config network_config.example.yaml --expected-version 1.6.0-rc1 --require-graphviz
           rpm -e nmap-flow-analyzer
           test ! -e /usr/bin/nmap-flow-analyzer
       - name: Build, inspect, and test AppImage
@@ -110,7 +110,7 @@ jobs:
           python3 scripts/validate-license-payload.py build/linux-rhel/AppDir/opt/nmap-flow-analyzer
           APPIMAGE_EXTRACT_AND_RUN=1 python3 scripts/smoke-test-package.py \
             --command dist-linux-rhel/nmap-flow-analyzer-1.3.0-rc1-rhel-x64.AppImage \
-            --examples examples --config network_config.example.yaml --expected-version 1.6.0.dev0 --require-graphviz
+            --examples examples --config network_config.example.yaml --expected-version 1.6.0-rc1 --require-graphviz
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: v130-rc1-rhel-x64-${{ github.run_id }}
