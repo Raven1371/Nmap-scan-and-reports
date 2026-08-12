@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nmap-flow-analyzer"
-version = "1.6.0.dev0"
+version = "1.6.0rc1"
 description = "Shadow Claw offline network investigation with human-reviewed firewall recommendations"
 readme = "README.md"
 license = "PolyForm-Noncommercial-1.0.0"
@@ -51,4 +51,3 @@ nmap_flow_analyzer = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
