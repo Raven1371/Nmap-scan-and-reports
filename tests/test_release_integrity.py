@@ -8,6 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RELEASE_VERSION = "1.6.0-rc1"
 
 
 def _run(*arguments: str) -> subprocess.CompletedProcess:
@@ -19,10 +20,10 @@ def _run(*arguments: str) -> subprocess.CompletedProcess:
 def test_release_inventory_round_trip_and_tamper_detection():
     with tempfile.TemporaryDirectory() as tmp:
         release = Path(tmp)
-        artifact = release / "nmap-flow-analyzer-1.3.0-rc1-ubuntu-x64.deb"
+        artifact = release / f"nmap-flow-analyzer-{RELEASE_VERSION}-ubuntu-x64.deb"
         artifact.write_bytes(b"package")
         created = _run(
-            "scripts/create-checksums.py", "--version", "1.3.0-rc1",
+            "scripts/create-checksums.py", "--version", RELEASE_VERSION,
             "--output-dir", str(release), str(artifact),
         )
         assert created.returncode == 0, created.stderr
@@ -32,13 +33,13 @@ def test_release_inventory_round_trip_and_tamper_detection():
         assert payload["artifacts"][0]["architecture"] == "x64"
         verified = _run(
             "scripts/verify-release.py", "--directory", str(release),
-            "--manifest", str(manifest), "--version", "1.3.0-rc1",
+            "--manifest", str(manifest), "--version", RELEASE_VERSION,
         )
         assert verified.returncode == 0, verified.stdout + verified.stderr
         artifact.write_bytes(b"tampered")
         rejected = _run(
             "scripts/verify-release.py", "--directory", str(release),
-            "--manifest", str(manifest), "--version", "1.3.0-rc1",
+            "--manifest", str(manifest), "--version", RELEASE_VERSION,
         )
         assert rejected.returncode != 0
         assert "mismatch" in rejected.stdout
@@ -50,7 +51,7 @@ def test_release_inventory_rejects_wrong_version_filename():
         artifact = release / "nmap-flow-analyzer-1.2.5-ubuntu-x64.deb"
         artifact.write_bytes(b"package")
         result = _run(
-            "scripts/create-checksums.py", "--version", "1.3.0-rc1",
+            "scripts/create-checksums.py", "--version", RELEASE_VERSION,
             "--output-dir", str(release), str(artifact),
         )
         assert result.returncode != 0
