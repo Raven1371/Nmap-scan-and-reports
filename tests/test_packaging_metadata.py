@@ -16,11 +16,11 @@ from nmap_flow_analyzer import __version__
 
 
 ROOT = Path(__file__).resolve().parents[1]
-HUMAN_VERSION = "1.6.0-rc1"
-PYTHON_VERSION = "1.6.0rc1"
-DEBIAN_VERSION = "1.6.0~rc1"
-CORE_VERSION = "0.3.0rc1"
-CORE_SHA = "e86440a1e1af2b1aaf62ded3cdc35bf656c8796f"
+HUMAN_VERSION = "1.6.0"
+PYTHON_VERSION = "1.6.0"
+DEBIAN_VERSION = "1.6.0"
+CORE_VERSION = "0.3.0"
+CORE_SHA = "7e08b5723bb4ce8d7c149635a38eab474ca17284"
 
 
 def _metadata():
@@ -63,7 +63,7 @@ def test_pytest_is_development_only_dependency():
     assert "pytest" in development
 
 
-def test_core_rc_dependency_and_immutable_ci_source_are_consistent():
+def test_core_stable_dependency_and_immutable_ci_source_are_consistent():
     project = _metadata()["project"]
     lock = (ROOT / "requirements.lock").read_text(encoding="utf-8").splitlines()
     inventory = (ROOT / "licenses/DEPENDENCY_LICENSE_INVENTORY.json").read_text(
@@ -71,14 +71,14 @@ def test_core_rc_dependency_and_immutable_ci_source_are_consistent():
     )
     assert f"shadow-core>={CORE_VERSION},<0.4" in project["dependencies"]
     assert f"shadow-core=={CORE_VERSION}" in lock
-    assert '"version": "0.3.0-rc1"' in inventory
+    assert '"version": "0.3.0"' in inventory
     assert f'"identifier": "shadow-core=={CORE_VERSION}"' in inventory
     for workflow_name in ("build-v130-ubuntu.yml", "build-v130-rhel.yml"):
         workflow = (ROOT / ".github/workflows" / workflow_name).read_text(
             encoding="utf-8"
         )
         assert CORE_SHA in workflow
-        assert "shadow_core-0.3.0rc1-py3-none-any.whl" in workflow
+        assert "shadow_core-0.3.0-py3-none-any.whl" in workflow
         assert "0.3.0.dev0" not in workflow
 
 

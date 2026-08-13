@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": {
     "name": "nmap-flow-analyzer",
-    "version": "1.6.0-rc1",
+    "version": "1.6.0",
     "license": "PolyForm-Noncommercial-1.0.0",
     "copyright": "Copyright 2026 Kache Flanery",
     "source_url": "https://github.com/Raven1371/shadow-claw",
@@ -50,7 +50,7 @@
       "evidence": "installed distribution metadata and LICENCE.rst", "release_blocker": false
     },
     {
-      "name": "Shadow Core", "version": "0.3.0-rc1", "identifier": "shadow-core==0.3.0rc1",
+      "name": "Shadow Core", "version": "0.3.0", "identifier": "shadow-core==0.3.0",
       "upstream": "https://github.com/Raven1371/shadow-core", "license": "PolyForm-Noncommercial-1.0.0",
       "copyright": "Copyright 2026 Kache Flanery", "classification": "runtime-project-dependency",
       "artifacts": [], "required_notice_files": [],

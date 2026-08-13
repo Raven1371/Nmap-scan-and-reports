@@ -18,7 +18,7 @@ professional legal review, register applicable copyrights, and pursue
 trademark filings for Shadow Claw™, Shadow Fang™, Shadow Core™, and
 related branding.
 5. Review platform status, release notes, licensing, and package inventory.
-6. With owner approval, publish `v1.6.0-rc1` as a prerelease.
+6. With owner approval, publish `v1.6.0` as a stable release.
 
 The final `v1.3.0` workflow additionally requires the Windows 11 verification
 and Windows package gate, package integrity checks, and a protected environment

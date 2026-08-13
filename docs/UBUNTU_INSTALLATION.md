@@ -3,13 +3,13 @@
 For the portable archive, verify the SHA-256 inventory, extract it, then run:
 
 ```bash
-./nmap-flow-analyzer-1.6.0-rc1-ubuntu-x64/nmap-flow-analyzer doctor
+./nmap-flow-analyzer-1.6.0-ubuntu-x64/nmap-flow-analyzer doctor
 ```
 
 For the DEB:
 
 ```bash
-sudo dpkg -i nmap-flow-analyzer-1.6.0-rc1-ubuntu-x64.deb
+sudo dpkg -i nmap-flow-analyzer-1.6.0-ubuntu-x64.deb
 nmap-flow-analyzer preflight
 ```
 
