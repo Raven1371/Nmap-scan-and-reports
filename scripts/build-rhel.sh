@@ -2,7 +2,7 @@
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
 bash "$root/scripts/package-linux-portable.sh" rhel
-release_version=${RELEASE_VERSION:-1.6.0-rc1}
+release_version=${RELEASE_VERSION:-1.6.0}
 work="$root/build/linux-rhel"
 out="$root/dist-linux-rhel"
 top="$work/rpmbuild"

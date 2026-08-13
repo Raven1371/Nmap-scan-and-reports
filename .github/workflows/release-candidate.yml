@@ -1,4 +1,4 @@
-name: Assemble v1.3.0 RC
+name: Assemble v1.6.0 stable
 
 on:
   workflow_dispatch:
@@ -11,8 +11,8 @@ on:
         description: Successful Rocky package workflow run ID
         required: true
         type: string
-      publish_prerelease:
-        description: Publish the verified bundle as a GitHub prerelease
+      publish_release:
+        description: Publish the verified stable bundle after owner approval
         required: true
         default: false
         type: boolean
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 env:
-  RELEASE_VERSION: 1.6.0-rc1
+  RELEASE_VERSION: 1.6.0
 
 jobs:
   assemble:
@@ -48,8 +48,8 @@ jobs:
             run_sha="$(gh run view "$run_id" --json headSha --jq .headSha)"
             git merge-base --is-ancestor "$run_sha" "$GITHUB_SHA"
           done
-          test "$(gh run view "$UBUNTU_RUN_ID" --json workflowName --jq .workflowName)" = "Build v1.3.0 RC on Ubuntu"
-          test "$(gh run view "$RHEL_RUN_ID" --json workflowName --jq .workflowName)" = "Build v1.3.0 RC on Rocky Linux 9"
+          test "$(gh run view "$UBUNTU_RUN_ID" --json workflowName --jq .workflowName)" = "Build v1.6.0 stable on Ubuntu"
+          test "$(gh run view "$RHEL_RUN_ID" --json workflowName --jq .workflowName)" = "Build v1.6.0 stable on Rocky Linux 9"
       - name: Download verified build artifacts
         env:
           GH_TOKEN: ${{ github.token }}
@@ -57,15 +57,15 @@ jobs:
           mkdir -p incoming/ubuntu incoming/rhel release
           gh run download "${{ inputs.ubuntu_run_id }}" --dir incoming/ubuntu
           gh run download "${{ inputs.rhel_run_id }}" --dir incoming/rhel
-          find incoming -type f -name 'nmap-flow-analyzer-1.6.0-rc1-*-x64*' ! -name '*.license-inventory.json' -exec cp {} release/ \;
+          find incoming -type f -name 'nmap-flow-analyzer-1.6.0-*-x64*' ! -name '*.license-inventory.json' -exec cp {} release/ \;
       - name: Create clean source archives
         run: |
-          git archive --format=zip --prefix=nmap-flow-analyzer-1.6.0-rc1/ \
-            -o release/nmap-flow-analyzer-1.6.0-rc1-source.zip HEAD
-          git archive --format=tar.gz --prefix=nmap-flow-analyzer-1.6.0-rc1/ \
-            -o release/nmap-flow-analyzer-1.6.0-rc1-source.tar.gz HEAD
-          unzip -l release/nmap-flow-analyzer-1.6.0-rc1-source.zip | grep 'nmap-flow-analyzer-1.6.0-rc1/LICENSE'
-          tar -tzf release/nmap-flow-analyzer-1.6.0-rc1-source.tar.gz | grep 'nmap-flow-analyzer-1.6.0-rc1/licenses/DEPENDENCY_LICENSE_INVENTORY.json'
+          git archive --format=zip --prefix=nmap-flow-analyzer-1.6.0/ \
+            -o release/nmap-flow-analyzer-1.6.0-source.zip HEAD
+          git archive --format=tar.gz --prefix=nmap-flow-analyzer-1.6.0/ \
+            -o release/nmap-flow-analyzer-1.6.0-source.tar.gz HEAD
+          unzip -l release/nmap-flow-analyzer-1.6.0-source.zip | grep 'nmap-flow-analyzer-1.6.0/LICENSE'
+          tar -tzf release/nmap-flow-analyzer-1.6.0-source.tar.gz | grep 'nmap-flow-analyzer-1.6.0/licenses/DEPENDENCY_LICENSE_INVENTORY.json'
       - name: Create and verify release inventory
         run: |
           mapfile -t artifacts < <(find release -maxdepth 1 -type f -name 'nmap-flow-analyzer-*' -print | sort)
@@ -87,30 +87,30 @@ jobs:
           EOF
       - uses: actions/upload-artifact@v4
         with:
-          name: v130-rc1-release-candidate-${{ github.run_id }}
+          name: v160-stable-release-${{ github.run_id }}
           path: release/*
           if-no-files-found: error
 
   publish:
-    if: ${{ inputs.publish_prerelease }}
+    if: ${{ inputs.publish_release }}
     needs: assemble
     runs-on: ubuntu-24.04
-    environment: prerelease
+    environment: release
     permissions:
       actions: read
       contents: write
     steps:
-      - name: Refuse non-RC source refs
+      - name: Require an owner-approved branch source
         run: test "${GITHUB_REF_TYPE}" = branch
       - uses: actions/download-artifact@v4
         with:
-          name: v130-rc1-release-candidate-${{ github.run_id }}
+          name: v160-stable-release-${{ github.run_id }}
           path: release
-      - name: Publish approved prerelease
+      - name: Publish approved stable release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create v1.6.0-rc1 release/* \
-            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease \
-            --title "nmap-flow-analyzer v1.6.0-rc1" \
+          gh release create v1.6.0 release/* \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "nmap-flow-analyzer v1.6.0" \
             --notes-file release/RELEASE_NOTES.md

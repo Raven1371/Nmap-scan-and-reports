@@ -10,13 +10,13 @@ sudo dnf install fontconfig
 For the portable archive, verify the SHA-256 inventory, extract it, then run:
 
 ```bash
-./nmap-flow-analyzer-1.6.0-rc1-rhel-x64/nmap-flow-analyzer doctor
+./nmap-flow-analyzer-1.6.0-rhel-x64/nmap-flow-analyzer doctor
 ```
 
 For the RPM:
 
 ```bash
-sudo rpm -ivh nmap-flow-analyzer-1.6.0-rc1-rhel-x64.rpm
+sudo rpm -ivh nmap-flow-analyzer-1.6.0-rhel-x64.rpm
 nmap-flow-analyzer preflight
 ```
 

@@ -1,6 +1,6 @@
-# nmap-flow-analyzer v1.6.0-rc1
+# nmap-flow-analyzer v1.6.0
 
-This coordinated prerelease adds the Shadow Core ingestion contract and
+This coordinated stable release adds the Shadow Core ingestion contract and
 Shadow Evidence integration while preserving human-reviewed firewall-policy
 boundaries. It includes offline Python and standalone Linux packaging.
 

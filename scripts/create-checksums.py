@@ -11,12 +11,12 @@ from pathlib import Path
 
 
 PLATFORM_RE = re.compile(
-    r"^nmap-flow-analyzer-(?P<version>\d+\.\d+\.\d+-rc\d+)-"
+    r"^nmap-flow-analyzer-(?P<version>\d+\.\d+\.\d+(?:-rc\d+)?)-"
     r"(?P<platform>ubuntu|rhel|windows)-(?P<arch>x64|arm64)"
     r"(?P<tail>-portable\.tar\.gz|-portable\.zip|\.deb|\.rpm|\.AppImage|)$"
 )
 SOURCE_RE = re.compile(
-    r"^nmap-flow-analyzer-(?P<version>\d+\.\d+\.\d+-rc\d+)-"
+    r"^nmap-flow-analyzer-(?P<version>\d+\.\d+\.\d+(?:-rc\d+)?)-"
     r"source\.(?P<format>zip|tar\.gz)$"
 )
 

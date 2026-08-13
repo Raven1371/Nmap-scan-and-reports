@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RELEASE_VERSION = "1.6.0-rc1"
+RELEASE_VERSION = "1.6.0"
 
 
 def _run(*arguments: str) -> subprocess.CompletedProcess:

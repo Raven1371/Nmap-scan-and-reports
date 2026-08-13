@@ -1,5 +1,5 @@
 Package: nmap-flow-analyzer
-Version: 1.6.0~rc1
+Version: 1.6.0
 Section: admin
 Priority: optional
 Architecture: amd64

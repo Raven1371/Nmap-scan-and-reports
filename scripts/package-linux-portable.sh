@@ -3,7 +3,7 @@ set -euo pipefail
 
 platform=${1:?usage: package-linux-portable.sh ubuntu|rhel}
 case "$platform" in ubuntu|rhel) ;; *) echo "unsupported platform: $platform" >&2; exit 2;; esac
-release_version=${RELEASE_VERSION:-1.6.0-rc1}
+release_version=${RELEASE_VERSION:-1.6.0}
 root=$(cd "$(dirname "$0")/.." && pwd)
 work="$root/build/linux-$platform"
 out="$root/dist-linux-$platform"
